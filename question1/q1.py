@@ -34,35 +34,94 @@ This question should be written in Python.
 Please submit a file name q1.py with your code
 """
 
-def total_words(new_list, counts_dict):
-    counts_dict["total words"] = len(new_list)
+def total_words(file_word_list, counts_dict):
+
+    """
+    Counts all the words in a text file, stored as a list.
+
+    Parameters
+    -----------
+        file_word_list: list of words, as strings, contained in a text file.
+        counts_dict: dictionary of word and sentence counts.
+
+    Returns
+    ---------
+        counts_dict:  updated word/sentence count dictionary.
+    """
+
+    counts_dict["total words"] = len(file_word_list)
     #print(new_list, counts_dict)
     return counts_dict
 
-def unique_words(new_list, counts_dict):
-    counts_dict["unique words"] = len(set(new_list))
+def unique_words(file_word_list, counts_dict):
+
+    """
+    Counts all the unique words in a text file, stored as a list.
+
+    Parameters
+    -----------
+        file_word_list: list of words, as strings, contained in a text file.
+        counts_dict: dictionary of word and sentence counts.
+
+    Returns
+    --------
+        counts_dict:  updated word/sentence count dictionary.
+    """
+
+    counts_dict["unique words"] = len(set(file_word_list))
     #print(new_list, counts_dict)
     return counts_dict
 
-def count_sentences(new_list, counts_dict):
-    for char in "".join(new_list):
+def count_sentences(file_word_list, counts_dict):
+
+    """
+    Counts the number of question marks, periods and exclamation points in a
+    massive string as a method for estimating the number of sentences in the
+    file.
+
+    Parameters
+    -----------
+        file_word_list: list of words, as strings, contained in a text file.
+        counts_dict: dictionary of word and sentence counts.
+
+    Returns
+    ----------
+        counts_dict:  updated word/sentence count dictionary.
+    """
+
+    for char in "".join(file_word_list):
         if char in "?!.":
             counts_dict["sentences"] += 1
     #print(counts_dict)
     return counts_dict
 
 def text_content_analyzer(file_path):
+    """
+    Opens the file at the given path and uses helper functions to calculate
+    the number of total words, unique words and sentences found in the file.
+
+    Parameters
+    -----------
+        file_path: the filepath and filename of the text file to analyze,
+        represented as a string.
+
+    Returns
+    ----------
+        counts_dict:  A word/sentence dictionary with the text file statistics.
+    """
+
     counts_dict = dict({"total words": 0, "unique words": 0, "sentences": 0})
-    new_list = list()
+    file_word_list = list()
     with open(file_path) as txt_file:
         for line in txt_file:
-            new_list += line.lower().split()
-        total_words(new_list, counts_dict)
-        unique_words(new_list, counts_dict)
-        count_sentences(new_list, counts_dict)
+            file_word_list += line.lower().split()
+        total_words(file_word_list, counts_dict)
+        unique_words(file_word_list, counts_dict)
+        count_sentences(file_word_list, counts_dict)
         return counts_dict
 
-#print(total_words("This is a test string".split(), {"total words": 0}))
-#print(unique_words("This This is is a a test test string string".lower().split(), {"unique words": 0}))
-#print(count_sentences("This. is a? test? string!".split(), {"sentences": 0}))
-#print(text_content_analyzer("./test_data/hamlet.txt"))
+if __name__ == '__main__':
+    print(total_words("This is a test string".split(), {"total words": 0}))
+    print(unique_words("This This is is a a test test string string".lower().split(), {"unique words": 0}))
+    print(count_sentences("This. is a? test? string!".split(), {"sentences": 0}))
+    print(text_content_analyzer("./test_data/hamlet.txt"))
