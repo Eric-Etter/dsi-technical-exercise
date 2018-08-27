@@ -1,0 +1,521 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{question3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{DSI Technical Exercise, Question
+3}\label{dsi-technical-exercise-question-3}
+
+    \subsection{Business Case Study for Experiment and
+Analysis}\label{business-case-study-for-experiment-and-analysis}
+
+\begin{itemize}
+\tightlist
+\item
+  A consumer posts a \textbf{request} for a service needed. Every
+  request is in some \textbf{category} (e.g., Catering, Personal
+  Training, Interior Design) and some \textbf{location} (e.g., New York,
+  San Francisco).\\
+\item
+  We match the request up with appropriate service providers and send
+  each of those providers an \textbf{invite} to quote on the request.\\
+\item
+  Providers view the invite and some choose to send a \textbf{quote} to
+  the consumer expressing interest.
+\end{itemize}
+
+    \subsection{Split Test (or A/B/n) Experimental Design and Test
+Results}\label{split-test-or-abn-experimental-design-and-test-results}
+
+I've just concluded a test of our \emph{quote form}. After receiving an
+invite, service providers come to the quote form to view the consumer
+request and choose whether or not to pay to send a quote. My goal was to
+determine if certain changes to the design of the form would cause more
+providers to send a quote after coming to the page.
+
+Over the course of a week, I divided invites from about 3000 requests
+among four new variations of the quote form as well as the baseline form
+we've been using for the last year. Here are my results:
+
+\begin{itemize}
+\tightlist
+\item
+  Baseline: 32 quotes out of 595 viewers
+\item
+  Variation 1: 30 quotes out of 599 viewers
+\item
+  Variation 2: 18 quotes out of 622 viewers
+\item
+  Variation 3: 51 quotes out of 606 viewers
+\item
+  Variation 4: 38 quotes out of 578 viewers
+\end{itemize}
+
+    \subsection{Split Test (or A/B/n)
+Analysis}\label{split-test-or-abn-analysis}
+
+    \paragraph{Analytical Assumptions}\label{analytical-assumptions}
+
+As population inferences will be made using the sample statistics
+generated as part of the test execution these assumptions must be made:
+the sample statistic distribution is approximately normal, the samples
+are independant, and the sample size is significantly large.
+
+The significance level, or \(\alpha\), will be 5\% for this analysis.
+
+    \paragraph{Experimental Design}\label{experimental-design}
+
+The summary of the experimental design overview indicates human
+involvement with the assignment of service providers and a particular
+summary page. Further discussion is needed to ensure that the assignment
+process is sufficiently randomize.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} import standard libraries for analytical work}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sms}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} load csv test results into a dataframe}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./test\PYZus{}data/acme\PYZus{}corp.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} take a look at the dataframe}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}         Bucket  Quotes  Views
+         0     Baseline      32    595
+         1  Variation 1      30    599
+         2  Variation 2      18    622
+         3  Variation 3      51    606
+         4  Variation 4      38    578
+\end{Verbatim}
+            
+    \paragraph{The Hypotheses}\label{the-hypotheses}
+
+    The A/B/n (or Split Test) testing analysis is a controlled experiment
+leveraging hypothesis statements. Let's go ahead and document all four
+null/alternative statements.
+
+Null and alternative hypothesis for the controlled experiment of the
+variation 1 of the submittal page versus the baseline or existing
+submittal page.
+
+\(H_{0}: \pi_{variation1} - \pi_{baseline} = 0\)\\
+\(H_{a}: \pi_{variation1} - \pi_{baseline} \gt 0\)
+
+Null and alternative hypothesis for the controlled experiment of the
+variation 2 of the submittal page versus the baseline or existing
+submittal page.
+
+\(H_{0}: \pi_{variation2} - \pi_{baseline} = 0\)\\
+\(H_{a}: \pi_{variation2} - \pi_{baseline} \gt 0\)
+
+Null and alternative hypothesis for the controlled experiment of the
+variation 3 of the submittal page versus the baseline or existing
+submittal page.
+
+\(H_{0}: \pi_{variation3} - \pi_{baseline} = 0\)\\
+\(H_{a}: \pi_{variation3} - \pi_{baseline} \gt 0\)
+
+Null and alternative hypothesis for the controlled experiment of the
+variation 4 of the submittal page versus the baseline or existing
+submittal page.
+
+\(H_{0}: \pi_{variation4} - \pi_{baseline} = 0\)\\
+\(H_{a}: \pi_{variation4} - \pi_{baseline} \gt 0\)
+
+Each of these null statements assert that no difference exists between
+the population proportion, where proportion is represented as \(\pi\).
+
+All 4 of the alternative statements assert that the population
+proportion is greater than the existing population proportion, where
+proportion is represented as \(\pi\).
+
+    \paragraph{Built-In Function
+"proportions\_ztest"}\label{built-in-function-proportions_ztest}
+
+    The A/B/n testing analysis will utilize a built-in statsmodel function
+called proportions\_ztest. Looking at the help page for this function
+several arguments are required for this calculation, which will be
+performed in the next cell.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} baseline count and nobs}
+         \PY{n}{baseline\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bucket == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Baseline}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{baseline\PYZus{}count} \PY{o}{=} \PY{n}{baseline\PYZus{}df}\PY{o}{.}\PY{n}{Quotes}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{baseline\PYZus{}nobs} \PY{o}{=} \PY{n}{baseline\PYZus{}df}\PY{o}{.}\PY{n}{Views}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Baseline count and nobs is: }\PY{l+s+si}{\PYZob{}baseline\PYZus{}count\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}baseline\PYZus{}nobs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} variation 1 count and nobs}
+         \PY{n}{variation1\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bucket == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Variation 1}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{variation1\PYZus{}count} \PY{o}{=} \PY{n}{variation1\PYZus{}df}\PY{o}{.}\PY{n}{Quotes}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{variation1\PYZus{}nobs} \PY{o}{=} \PY{n}{variation1\PYZus{}df}\PY{o}{.}\PY{n}{Views}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Variation 1 count and nobs is: }\PY{l+s+si}{\PYZob{}variation1\PYZus{}count\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}variation1\PYZus{}nobs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} variation 2 count and nobs}
+         \PY{n}{variation2\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bucket == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Variation 2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{variation2\PYZus{}count} \PY{o}{=} \PY{n}{variation2\PYZus{}df}\PY{o}{.}\PY{n}{Quotes}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{variation2\PYZus{}nobs} \PY{o}{=} \PY{n}{variation2\PYZus{}df}\PY{o}{.}\PY{n}{Views}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Variation 2 count and nobs is: }\PY{l+s+si}{\PYZob{}variation2\PYZus{}count\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}variation2\PYZus{}nobs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} variation 3 count and nobs}
+         \PY{n}{variation3\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bucket == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Variation 3}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{variation3\PYZus{}count} \PY{o}{=} \PY{n}{variation3\PYZus{}df}\PY{o}{.}\PY{n}{Quotes}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{variation3\PYZus{}nobs} \PY{o}{=} \PY{n}{variation3\PYZus{}df}\PY{o}{.}\PY{n}{Views}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Variation 3 count and nobs is: }\PY{l+s+si}{\PYZob{}variation3\PYZus{}count\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}variation3\PYZus{}nobs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} variation 3 count and nobs}
+         \PY{n}{variation4\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bucket == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Variation 4}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{variation4\PYZus{}count} \PY{o}{=} \PY{n}{variation4\PYZus{}df}\PY{o}{.}\PY{n}{Quotes}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{variation4\PYZus{}nobs} \PY{o}{=} \PY{n}{variation4\PYZus{}df}\PY{o}{.}\PY{n}{Views}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Variation 4 count and nobs is: }\PY{l+s+si}{\PYZob{}variation4\PYZus{}count\PYZcb{}}\PY{l+s+s2}{ and }\PY{l+s+si}{\PYZob{}variation4\PYZus{}nobs\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Baseline count and nobs is: 32 and 595
+Variation 1 count and nobs is: 30 and 599
+Variation 2 count and nobs is: 18 and 622
+Variation 3 count and nobs is: 51 and 606
+Variation 4 count and nobs is: 38 and 578
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} calculate the z\PYZhy{}score and p\PYZhy{}value for variation1 and baseline experiment}
+         \PY{n}{z\PYZus{}score\PYZus{}variation1}\PY{p}{,} \PY{n}{p\PYZus{}value\PYZus{}variation1} \PY{o}{=} \PY{n}{sms}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{proportions\PYZus{}ztest}\PY{p}{(}\PY{p}{[}\PY{n}{variation1\PYZus{}count}\PY{p}{,} \PY{n}{baseline\PYZus{}count}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{variation1\PYZus{}nobs}\PY{p}{,} \PY{n}{baseline\PYZus{}nobs}\PY{p}{]}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{larger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The p\PYZhy{}value for the Variation 1 and Baseline experiment is }\PY{l+s+si}{\PYZob{}p\PYZus{}value\PYZus{}variation1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} calculate the z\PYZhy{}score and p\PYZhy{}value for variation2 and baseline experiment}
+         \PY{n}{z\PYZus{}score\PYZus{}variation2}\PY{p}{,} \PY{n}{p\PYZus{}value\PYZus{}variation2} \PY{o}{=} \PY{n}{sms}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{proportions\PYZus{}ztest}\PY{p}{(}\PY{p}{[}\PY{n}{variation2\PYZus{}count}\PY{p}{,} \PY{n}{baseline\PYZus{}count}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{variation2\PYZus{}nobs}\PY{p}{,} \PY{n}{baseline\PYZus{}nobs}\PY{p}{]}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{larger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The p\PYZhy{}value for the Variation 2 and Baseline experiment is }\PY{l+s+si}{\PYZob{}p\PYZus{}value\PYZus{}variation2\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} calculate the z\PYZhy{}score and p\PYZhy{}value for variation3 and baseline experiment}
+         \PY{n}{z\PYZus{}score\PYZus{}variation3}\PY{p}{,} \PY{n}{p\PYZus{}value\PYZus{}variation3} \PY{o}{=} \PY{n}{sms}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{proportions\PYZus{}ztest}\PY{p}{(}\PY{p}{[}\PY{n}{variation3\PYZus{}count}\PY{p}{,} \PY{n}{baseline\PYZus{}count}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{variation3\PYZus{}nobs}\PY{p}{,} \PY{n}{baseline\PYZus{}nobs}\PY{p}{]}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{larger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The p\PYZhy{}value for the Variation 3 and Baseline experiment is }\PY{l+s+si}{\PYZob{}p\PYZus{}value\PYZus{}variation3\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} calculate the z\PYZhy{}score and p\PYZhy{}value for variation4 and baseline experiment}
+         \PY{n}{z\PYZus{}score\PYZus{}variation4}\PY{p}{,} \PY{n}{p\PYZus{}value\PYZus{}variation4} \PY{o}{=} \PY{n}{sms}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{proportions\PYZus{}ztest}\PY{p}{(}\PY{p}{[}\PY{n}{variation4\PYZus{}count}\PY{p}{,} \PY{n}{baseline\PYZus{}count}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{variation4\PYZus{}nobs}\PY{p}{,} \PY{n}{baseline\PYZus{}nobs}\PY{p}{]}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{larger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The p\PYZhy{}value for the Variation 4 and Baseline experiment is }\PY{l+s+si}{\PYZob{}p\PYZus{}value\PYZus{}variation4\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The p-value for the Variation 1 and Baseline experiment is 0.6133099143530945
+The p-value for the Variation 2 and Baseline experiment is 0.9854676438929962
+The p-value for the Variation 3 and Baseline experiment is 0.018986239169411456
+The p-value for the Variation 4 and Baseline experiment is 0.19360793468873894
+
+    \end{Verbatim}
+
+    \paragraph{Conclusions}\label{conclusions}
+
+The p-value for Variation 1, 2, and 4 experiment is greater than the
+significance level of 5\% and the null hyposthesis will not be rejected.
+The p-value for experiment is less than the significance level of 5\%
+for the third variation of the submittal page, make that experiment the
+only variation allowing us to reject the null hypothesis.
+
+Recommending that Variation 3 of the submittal page be scheduled for
+installation into the production domain for customer use.
+
+    \paragraph{References}\label{references}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  "A Refresher on A/B Testing". Retrieved from
+  https://hbr.org/2017/06/a-refresher-on-ab-testing\#
+\item
+  "proportions\_ztest". Retrieved from
+  http://knowledgetack.com/python/statsmodels/proportions\_ztest/
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
